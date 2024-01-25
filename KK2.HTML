@@ -1,0 +1,87 @@
+
+<html>
+
+<style>
+p {
+    text-transform:capitalize;
+}
+</style>
+
+<script>
+
+var myObj = { custName:"",custEmail:"",custPhone:"" };
+var mytext='Name: '+myObj.custName+'\n Email:'+myObj.custEmail+' Phone:'+myObj.custPhone;
+
+function updateF(what, ff){
+	myObj[what] = document.getElementById(ff).value;
+	mytext='Name: '+myObj.custName+'<br>Email:'+myObj.custEmail+'<br>Phone:'+myObj.custPhone;
+	//console.log(what, ff);
+	document.getElementById("demo").innerHTML = mytext;
+}
+
+function myAlert1() {
+	//f1 = document.getElementById("mytextfield1").value;
+	myObj.f1 = document.getElementById("mytextfield1").value;
+    mytext='Name: '+myObj.f1+'<br>Email:'+f2+'<br>Phone:'+f3;
+	document.getElementById("demo").innerHTML = mytext;
+	console.log(myObj);
+}
+
+
+function copyMyText() {
+  // Get the text field
+  // alert(mytext);
+  var copyText = document.getElementById("demo").innerHTML;
+ //alert(copyText);
+ 
+  // Select the text field
+  //copyText.select();
+  //copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Alert the copied text  
+  result = copyText.split('<br>').join('\n');
+  capString=result.replace(/\b\w/g, l => l.toUpperCase())
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(capString);
+  //navigator.clipboard.writeText(document.getElementById("demo").innerHTML);
+  alert("Copied the text: " + capString);
+  
+  
+}
+function loadText() {
+	mytext='Name: '+myObj.custName+'<br>Email:'+myObj.custEmail+'<br>Phone:'+myObj.custPhone;
+	document.getElementById("demo").innerHTML = mytext;
+}
+
+</script>
+
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+</head>
+
+<body bgcolor="#C0C0C0" onload="loadText()">  
+
+<div>Name: <input id="mytextfield1" type="text" onkeypress="updateF('custName','mytextfield1')" onfocusout="updateF('custName','mytextfield1')"></div>
+<div>Email:<input id="mytextfield2" type="text" onkeypress="updateF('custEmail','mytextfield2')" onfocusout="updateF('custEmail','mytextfield2')"></div>
+<div>Phone:<input id="mytextfield3" type="text" onkeypress="updateF('custPhone','mytextfield3')" onfocusout="updateF('custPhone','mytextfield3')"></div>
+
+<br>
+<!-- The text field -->
+<!-- <input type="text" value="Hello World" id="myInput"> -->
+<br>
+
+<!-- The button used to copy the text -->
+
+
+<p id="demo"></p>
+
+<button onclick="copyMyText()">Copy text</button>
+
+
+
+
+</body>
+</html>
