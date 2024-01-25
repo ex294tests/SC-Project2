@@ -1,0 +1,99 @@
+https://www.w3schools.com/html/tryit.asp?filename=tryhtml_checkbox
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<form method="post" action="/Tests/Post">  
+  <br>
+   <fieldset>  
+     <legend>Customer details</legend>  
+	 Full name: <input type="text" name="custfullname" placeholder="Full Name" size="50" default="unknown"/> <br>
+	 Email       : <input type="text" name="custemail" placeholder="Email" size="50" default="unknown"/> <br>
+	 Phone : <input type="text" name="custphone" placeholder="00000000" size="50" default="unknown"/> <br>
+    
+     <label for="chkAddr">
+       <input type="checkbox" id="chkAddr" name="site_addr" onclick="ShowHideAddr(this)" checked>Site Address
+     </label>
+      <input hiden id="dvAddr" style="display: none" type="text" size="100" name="cust_addr_tex" placeholder="Enter full address"/>  <br>
+    
+   <!---  fsdfsd -->
+     <label for="chkOnsite">
+    	<input type="checkbox" id="chkOnsite" name="cust_onsite" value="customer_poc" onclick="ShowHideOnsite(this)" checked>Onsite Contact<br> 
+     </label>
+       <div id="dvOnsite" style="display: none">
+	Contact #1 Full Name: <input type="text" size="50" name="fullname" placeholder="Full Name" default="unknown"/> <br>
+	Contact #1 Email : <input type="text" size="50" name="email" placeholder="Email" default="unknown"/> <br>
+	Contact #1 Phone : <input type="text" size="50" name="phone" placeholder="00000000" default="unknown"/> <br>
+   </div>
+   </fieldset>  
+  
+  <br>
+
+  <br>
+  
+    FE / Parts only ?<br>
+  <input type="radio" id="fe" name="fe_parts" value="FE" checked>
+  <label for="fe">FE</label><br>
+  <input type="radio" id="parts" name="fe_parts" value="Parts Only">
+  <label for="parts">Parts Only</label><br>
+        <br>  
+        
+    <fieldset>  
+    <legend>FE?</legend>  
+    First name: <input type="text" name="fe_name" value="tbc" placeholder="Name" /> <br>
+    <br>
+	<!---  part details or logs needed -->
+    <input type="radio" id="logs" name="part_details" checked><label for="logs">Logs needed</label>
+   <input type="radio" id="partpn" name="part_details"><label for="fe">PN/Model/Specs </label><input type="text" name="firstname" placeholder="Name" /> 
+   
+	<br>
+	<br>
+	<!---  SLA -->
+	<input type="radio" id="4hr" name="slatypes" checked><label for="4hr">4hr</label>
+	<input type="radio" id="sameday" name="slatypes"><label for="sameday">Sameday</label>
+	<input type="radio" id="nbd" name="slatypes"><label for="nbd">NBD</label>
+	<input type="radio" id="rh" name="slatypes"><label for="rh">Remote Hands</label><br>
+	
+	
+	
+    <input type="checkbox" name="favorite_pet" value="Cats" onclick="return ValidatePetSelection();">Cats
+    <input type="checkbox" name="favorite_pet" value="Dogs" onclick="return ValidatePetSelection();">Dogs  
+    <input type="checkbox" name="favorite_pet" value="Birds" onclick="return ValidatePetSelection();">Birds<br>  
+        <br>  
+    </fieldset> 
+     <br>
+      <br>
+       <input type="submit" value="Submit now">  
+</form>  
+
+<script type="text/javascript">  
+function ValidatePetSelection()  
+{  
+    var checkboxes = document.getElementsByName("favorite_pet");  
+    var numberOfCheckedItems = 0;  
+    for(var i = 0; i < checkboxes.length; i++)  
+    {  
+        if(checkboxes[i].checked)  
+            numberOfCheckedItems++;  
+    }  
+    if(numberOfCheckedItems > 2)  
+    {  
+        alert("You can't select more than two favorite pets!");  
+        return false;  
+    }  
+}  
+
+
+  function ShowHideOnsite(chkOnsite) {
+    var dvOnsite = document.getElementById("dvOnsite");
+    dvOnsite.style.display = chkOnsite.checked ? "none" : "block";
+  }
+  function ShowHideAddr(chkAddr) {
+    var dvAddr = document.getElementById("dvAddr");
+    dvAddr.style.display = chkAddr.checked ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>
