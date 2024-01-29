@@ -1,99 +1,180 @@
 https://www.w3schools.com/html/tryit.asp?filename=tryhtml_checkbox
 
+https://www.tutorialspoint.com/online_html_editor.php
+
 
 <!DOCTYPE html>
 <html>
-<body>
+<body onload="loadText()">
 <form method="post" action="/Tests/Post">  
   <br>
    <fieldset>  
      <legend>Customer details</legend>  
-	 Full name: <input type="text" name="custfullname" placeholder="Full Name" size="50" default="unknown"/> <br>
-	 Email       : <input type="text" name="custemail" placeholder="Email" size="50" default="unknown"/> <br>
-	 Phone : <input type="text" name="custphone" placeholder="00000000" size="50" default="unknown"/> <br>
+	 Full name: <input type="text" name="custfullname" placeholder="Full Name" size="50" id="mytextfield1" onkeypress="updateF('custName','mytextfield1')" onfocusout="updateF('custName','mytextfield1')" /> <br>
+	 Email       : <input type="text" name="custemail" placeholder="Email" size="50" id="mytextfield2" onkeypress="updateF('custEmail','mytextfield2')" onfocusout="updateF('custEmail','mytextfield2')"  /> <br>
+	 Phone : <input type="text" name="custphone" placeholder="00000000" size="50" id="mytextfield3" onkeypress="updateF('custPhone','mytextfield3')" onfocusout="updateF('custPhone','mytextfield3')" /> <br>
     
      <label for="chkAddr">
        <input type="checkbox" id="chkAddr" name="site_addr" onclick="ShowHideAddr(this)" checked>Site Address
      </label>
-      <input hiden id="dvAddr" style="display: none" type="text" size="100" name="cust_addr_tex" placeholder="Enter full address"/>  <br>
+      <input hiden id="dvAddr" style="display: none" type="text" size="100" name="siteAddr" placeholder="Enter full address" onkeypress="updateF('siteAddr','dvAddr')" onfocusout="updateF('siteAddr','dvAddr')"   />  <br>
     
    <!---  fsdfsd -->
      <label for="chkOnsite">
     	<input type="checkbox" id="chkOnsite" name="cust_onsite" value="customer_poc" onclick="ShowHideOnsite(this)" checked>Onsite Contact<br> 
      </label>
        <div id="dvOnsite" style="display: none">
-	Contact #1 Full Name: <input type="text" size="50" name="fullname" placeholder="Full Name" default="unknown"/> <br>
-	Contact #1 Email : <input type="text" size="50" name="email" placeholder="Email" default="unknown"/> <br>
-	Contact #1 Phone : <input type="text" size="50" name="phone" placeholder="00000000" default="unknown"/> <br>
-   </div>
+			Contact #1 Full Name: <input type="text" size="50" name="fullname" placeholder="Full Name" default="unknown"/> <br>
+			Contact #1 Email : <input type="text" size="50" name="email" placeholder="Email" default="unknown"/> <br>
+			Contact #1 Phone : <input type="text" size="50" name="phone" placeholder="00000000" default="unknown"/> <br>
+		</div>
    </fieldset>  
-  
   <br>
 
-  <br>
-  
-    FE / Parts only ?<br>
-  <input type="radio" id="fe" name="fe_parts" value="FE" checked>
-  <label for="fe">FE</label><br>
-  <input type="radio" id="parts" name="fe_parts" value="Parts Only">
-  <label for="parts">Parts Only</label><br>
-        <br>  
-        
-    <fieldset>  
-    <legend>FE?</legend>  
-    First name: <input type="text" name="fe_name" value="tbc" placeholder="Name" /> <br>
-    <br>
-	<!---  part details or logs needed -->
-    <input type="radio" id="logs" name="part_details" checked><label for="logs">Logs needed</label>
-   <input type="radio" id="partpn" name="part_details"><label for="fe">PN/Model/Specs </label><input type="text" name="firstname" placeholder="Name" /> 
-   
-	<br>
-	<br>
-	<!---  SLA -->
+	 
+	 <label for="chkFEOnsite">
+		<input type="radio" id="chkFEOnsite" name="kk" checked onclick="ShowHideFEOnsite(this)" checked>FE is pressed<br> 
+	</label>
+	<label for="chkParts">
+		<input type="radio" id="chkParts" name="kk" onclick="ShowHideParts(this)">parts<br> 
+	</label>
+	   <br>
+	 
+	 
+	<!---  FE -->	
+	<label for="chkFEOnsite2" style="display: none">
+		<input type="checkbox" id="chkFEOnsite2" onclick="ShowHideFEOnsite(this)" checked>FE is pressed<br> 
+	</label>
+
+	<div id="dvFEOnsite" style="display: block">
+	<fieldset>  
+		<legend>FE</legend>  
+			First name: <input type="text" name="fe_name" placeholder="FE's name" /> <br>
+			<br>
+			<label for="FE_email_access">
+				<input type="checkbox" id="FE_email_access" name="fe_onsite" >Email customer to grant access<br> 
+			</label>  
+	</fieldset> 
+	</div>
+
+
+	<label for="chkParts2" style="display: none">
+		<input type="checkbox" id="chkParts2" onclick="ShowHideParts(this)" checked="false" checked>Parts Only<br> 
+	</label>
+		 
+	 <!---  Parts Only -->
+	 <div id="dvParts" style="display: none">
+		<fieldset>  
+			<legend>Parts Only</legend>  
+				Part PN/Model/Specs: <input type="text" name="partdetails" placeholder="Part details/specs" /> <br>
+				<br>
+		</fieldset> 
+	</div>
+     <br>
+	 
+	 
+	 <!---  part details or logs needed -->
+    <input type="checkbox" id="logs" name="part_details2" checked><label for="logs">Emailed customer requesting logs</label>
+      <br>
+	  <br>
+	 	<!---  SLA -->
 	<input type="radio" id="4hr" name="slatypes" checked><label for="4hr">4hr</label>
 	<input type="radio" id="sameday" name="slatypes"><label for="sameday">Sameday</label>
 	<input type="radio" id="nbd" name="slatypes"><label for="nbd">NBD</label>
 	<input type="radio" id="rh" name="slatypes"><label for="rh">Remote Hands</label><br>
-	
-	
-	
-    <input type="checkbox" name="favorite_pet" value="Cats" onclick="return ValidatePetSelection();">Cats
-    <input type="checkbox" name="favorite_pet" value="Dogs" onclick="return ValidatePetSelection();">Dogs  
-    <input type="checkbox" name="favorite_pet" value="Birds" onclick="return ValidatePetSelection();">Birds<br>  
-        <br>  
-    </fieldset> 
-     <br>
-      <br>
+		 <br> 
+		 
+		 
+		<p id="demo"></p> 
+		 
+	  <br>
        <input type="submit" value="Submit now">  
 </form>  
 
 <script type="text/javascript">  
-function ValidatePetSelection()  
-{  
-    var checkboxes = document.getElementsByName("favorite_pet");  
-    var numberOfCheckedItems = 0;  
-    for(var i = 0; i < checkboxes.length; i++)  
-    {  
-        if(checkboxes[i].checked)  
-            numberOfCheckedItems++;  
-    }  
-    if(numberOfCheckedItems > 2)  
-    {  
-        alert("You can't select more than two favorite pets!");  
-        return false;  
-    }  
-}  
-
+	var myObj = { custName:"",custEmail:"",custPhone:"",siteAddr:" Confirmed" };
+	var mytext='Name: '+myObj.custName+'\n Email:'+myObj.custEmail+' Phone:'+myObj.custPhone+' Site Address:'+myObj.siteAddr;
 
   function ShowHideOnsite(chkOnsite) {
     var dvOnsite = document.getElementById("dvOnsite");
     dvOnsite.style.display = chkOnsite.checked ? "none" : "block";
   }
+  
+  function ShowHideFEOnsite(chkFEOnsite) {
+    var dvFEOnsite = document.getElementById("dvFEOnsite");
+    dvFEOnsite.style.display = chkFEOnsite.checked ? "block" : "none";
+	dvParts.style.display = chkParts.checked ? "block" : "none";
+  }
+  function ShowHideParts(chkParts) {
+    var dvParts = document.getElementById("dvParts");
+    dvParts.style.display = chkParts.checked ? "block" : "none";
+	dvFEOnsite.style.display = chkFEOnsite.checked ? "block" : "none";
+  }
+  
   function ShowHideAddr(chkAddr) {
     var dvAddr = document.getElementById("dvAddr");
     dvAddr.style.display = chkAddr.checked ? "none" : "block";
   }
-</script>
+  
+  
+function updateF(what, ff){
+	myObj[what] = document.getElementById(ff).value;
+	mytext='Name: '+myObj.custName.toLowerCase()+'<br>Email:'+myObj.custEmail.toLowerCase()+'<br>Phone:'+myObj.custPhone+'<br> Site Address:'+myObj.siteAddr;
+	//console.log(what, ff);
+	document.getElementById("demo").innerHTML = mytext;
+}
 
+function myAlert1() {
+	//f1 = document.getElementById("mytextfield1").value;
+	myObj.f1 = document.getElementById("mytextfield1").value;
+    mytext='Name: '+myObj.f1+'<br>Email:'+f2+'<br>Phone:'+f3;
+	document.getElementById("demo").innerHTML = mytext;
+	console.log(myObj);
+}
+
+
+function copyMyText() {
+  // Get the text field
+  // alert(mytext);
+  var copyText = document.getElementById("demo").innerHTML;
+ //alert(copyText);
+ 
+  // Select the text field
+  //copyText.select();
+  //copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Alert the copied text  
+  result = copyText.split('<br>').join('\n');
+  capString=result.replace(/\b\w/g, l => l.toUpperCase())
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(capString);
+  //navigator.clipboard.writeText(document.getElementById("demo").innerHTML);
+  alert("Copied the text: " + capString);
+  
+  
+}
+function loadText() {
+	mytext='Name: '+myObj.custName+'<br>Email:'+myObj.custEmail+'<br>Phone:'+myObj.custPhone+'<br> Site Address:'+myObj.siteAddr;
+	document.getElementById("demo").innerHTML = mytext;
+}
+
+const checkbox = document.getElementById('chkAddr');
+
+checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    myObj.siteAddr=' Confirmed'
+  } else {
+    //alert('not checked');
+	myObj.siteAddr='';
+  }
+  loadText();
+})
+
+</script>
+<style>
+p {
+    text-transform:capitalize;
+}
+</style>
 </body>
 </html>
