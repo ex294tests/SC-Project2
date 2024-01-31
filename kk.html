@@ -7,26 +7,29 @@ https://www.tutorialspoint.com/online_html_editor.php
 <html>
 <body onload="loadText()">
 <form method="post" action="/Tests/Post">  
+
+	<!---  customer details -->
   <br>
    <fieldset>  
      <legend>Customer details</legend>  
 	 Full name: <input type="text" name="custfullname" placeholder="Full Name" size="50" id="mytextfield1" onkeypress="updateF('custName','mytextfield1')" onfocusout="updateF('custName','mytextfield1')" /> <br>
-	 Email       : <input type="text" name="custemail" placeholder="Email" size="50" id="mytextfield2" onkeypress="updateF('custEmail','mytextfield2')" onfocusout="updateF('custEmail','mytextfield2')"  /> <br>
 	 Phone : <input type="text" name="custphone" placeholder="00000000" size="50" id="mytextfield3" onkeypress="updateF('custPhone','mytextfield3')" onfocusout="updateF('custPhone','mytextfield3')" /> <br>
+	 Email       : <input type="text" name="custemail" placeholder="Email" size="50" id="mytextfield2" onkeypress="updateF('custEmail','mytextfield2')" onfocusout="updateF('custEmail','mytextfield2')"  /> <br>
+	
     
      <label for="chkAddr">
        <input type="checkbox" id="chkAddr" name="site_addr" onclick="ShowHideAddr(this)" checked>Site Address
      </label>
       <input hiden id="dvAddr" style="display: none" type="text" size="100" name="siteAddr" placeholder="Enter full address" onkeypress="updateF('siteAddr','dvAddr')" onfocusout="updateF('siteAddr','dvAddr')"   />  <br>
     
-   <!---  fsdfsd -->
+   <!---  onsite contact -->
      <label for="chkOnsite">
     	<input type="checkbox" id="chkOnsite" name="cust_onsite" value="customer_poc" onclick="ShowHideOnsite(this)" checked>Onsite Contact<br> 
      </label>
        <div id="dvOnsite" style="display: none">
-			Contact #1 Full Name: <input type="text" size="50" name="fullname" placeholder="Full Name" default="unknown"/> <br>
-			Contact #1 Email : <input type="text" size="50" name="email" placeholder="Email" default="unknown"/> <br>
-			Contact #1 Phone : <input type="text" size="50" name="phone" placeholder="00000000" default="unknown"/> <br>
+			Contact #1 Full Name: <input id="Onsite_name" type="text" size="50" name="onsite_name_value" placeholder="Full Name" onkeypress="updateF2('onsite_name_value','Onsite_name')" onfocusout="updateF2('onsite_name_value','Onsite_name')" /> <br>
+			Contact #1 Email : <input id="Onsite_email" type="text" size="50" name="onsite_email_value" placeholder="Email"  onkeypress="updateF2('onsite_email_value','Onsite_email')" onfocusout="updateF2('onsite_email_value','Onsite_email')" /> <br>
+			Contact #1 Phone : <input id="Onsite_phone" type="text" size="50" name="onsite_phone_value" placeholder="00000000"  onkeypress="updateF2('onsite_phone_value','Onsite_phone',)" onfocusout="updateF2('onsite_phone_value','Onsite_phone',)" /> <br>
 		</div>
    </fieldset>  
   <br>
@@ -92,8 +95,12 @@ https://www.tutorialspoint.com/online_html_editor.php
 </form>  
 
 <script type="text/javascript">  
-	var myObj = { custName:"",custEmail:"",custPhone:"",siteAddr:" Confirmed" };
-	var mytext='Name: '+myObj.custName+'\n Email:'+myObj.custEmail+' Phone:'+myObj.custPhone+' Site Address:'+myObj.siteAddr;
+	var myObj = { custName:"",custPhone:"",custEmail:"",siteAddr:" Confirmed",onsiteContact: "Customer"};
+	myObj.onsite_name_value="";
+	myObj.onsite_phone_value="";
+	myObj.onsite_email_value=""; 
+	//myObj.onsiteContact=myObj.custName+' '+myObj.custPhone+' '+myObj.custEmail;
+	var mytext='Name: '+myObj.custName+' Phone:'+myObj.custPhone+'\n Email:'+myObj.custEmail+' Site Address:'+myObj.siteAddr+' Onsite Contact: '+myObj.onsiteContact;
 
   function ShowHideOnsite(chkOnsite) {
     var dvOnsite = document.getElementById("dvOnsite");
@@ -119,17 +126,29 @@ https://www.tutorialspoint.com/online_html_editor.php
   
 function updateF(what, ff){
 	myObj[what] = document.getElementById(ff).value;
-	mytext='Name: '+myObj.custName.toLowerCase()+'<br>Email:'+myObj.custEmail.toLowerCase()+'<br>Phone:'+myObj.custPhone+'<br> Site Address:'+myObj.siteAddr;
+	myObj.onsiteContact=myObj.custName+' '+myObj.custPhone+' '+myObj.custEmail;
+	console.log(myObj);
+	mytext='Name: '+myObj.custName+'<br>Phone:'+myObj.custPhone+'<br>Email:'+myObj.custEmail+'<br> Site Address:'+myObj.siteAddr+'<br> Onsite Contact: '+myObj.onsiteContact;
 	//console.log(what, ff);
+	document.getElementById("demo").innerHTML = mytext.toLowerCase();
+}
+
+function updateF2(what, ff){
+	myObj[what] = document.getElementById(ff).value;
+	myObj.onsiteContact=myObj.onsite_name_value.toLowerCase()+' '+myObj.onsite_phone_value.toLowerCase()+' '+myObj.onsite_email_value; 
+	console.log(document.getElementById(ff).value);
+	mytext='Name: '+myObj.custName.toLowerCase()+'<br>Phone:'+myObj.custPhone.toLowerCase()+'<br>Email:'+myObj.custEmail.toLowerCase()+'<br> Site Address:'+myObj.siteAddr.toLowerCase()+'<br> Onsite Contact: '+myObj.onsiteContact.toLowerCase();
+	console.log(what, ff);
 	document.getElementById("demo").innerHTML = mytext;
 }
 
 function myAlert1() {
-	//f1 = document.getElementById("mytextfield1").value;
-	myObj.f1 = document.getElementById("mytextfield1").value;
-    mytext='Name: '+myObj.f1+'<br>Email:'+f2+'<br>Phone:'+f3;
-	document.getElementById("demo").innerHTML = mytext;
-	console.log(myObj);
+	f1 = document.getElementById("Onsite_name").value;
+	//alert(f1);
+	//myObj.f1 = document.getElementById("mytextfield1").value;
+    //mytext='Name: '+myObj.f1+'<br>Email:'+f2+'<br>Phone:'+f3;
+	//document.getElementById("demo").innerHTML = mytext;
+	console.log(f1);
 }
 
 
@@ -154,13 +173,15 @@ function copyMyText() {
   
 }
 function loadText() {
-	mytext='Name: '+myObj.custName+'<br>Email:'+myObj.custEmail+'<br>Phone:'+myObj.custPhone+'<br> Site Address:'+myObj.siteAddr;
+	if (myObj.onsiteContact == null ){
+		myObj.onsiteContact = "";
+	}
+	mytext='Name: '+myObj.custName+'<br>Phone:'+myObj.custPhone+'<br>Email:'+myObj.custEmail+'<br> Site Address:'+myObj.siteAddr+'<br> Onsite Contact: '+myObj.onsiteContact;
 	document.getElementById("demo").innerHTML = mytext;
 }
 
-const checkbox = document.getElementById('chkAddr');
-
-checkbox.addEventListener('change', (event) => {
+const checkbox_addr = document.getElementById('chkAddr');
+checkbox_addr.addEventListener('change', (event) => {
   if (event.currentTarget.checked) {
     myObj.siteAddr=' Confirmed'
   } else {
@@ -169,6 +190,27 @@ checkbox.addEventListener('change', (event) => {
   }
   loadText();
 })
+
+const checkbox_onsite = document.getElementById('chkOnsite');
+checkbox_onsite.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+	//alert('not checked');
+	// customer's name, email and mobile
+	myObj.onsiteContact=myObj.custName+' '+myObj.custPhone+' '+myObj.custEmail;    
+  } else {
+    //alert('not checked');
+	// Onsite's name email and mobile
+	if (myObj.onsiteContact == null ){
+		myObj.onsiteContact = "";
+	}else{
+		myObj.onsiteContact=myObj.onsite_name_value+' '+myObj.onsite_phone_value+' '+myObj.onsite_email_value; 
+		//myObj.onsiteContact="";
+	}
+  }
+  loadText();
+})
+
+
 
 </script>
 <style>
